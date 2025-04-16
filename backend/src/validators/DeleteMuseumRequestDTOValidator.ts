@@ -6,8 +6,8 @@ const deleteMuseumReqSchema = z
 	.object({
 		id: z
 			.number({
-				required_error: 'ID is required',
-				invalid_type_error: 'ID must be of integer type',
+				required_error: 'id is required',
+				invalid_type_error: 'id must be of integer type',
 			})
 			.int(),
 	})

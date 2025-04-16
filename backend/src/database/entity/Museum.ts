@@ -24,8 +24,9 @@ export class Museum extends BaseEntity {
 	 */
 	@Column({
 		nullable: false,
+		unique: true,
 	})
-	osmid!: number;
+	osmid!: string;
 
 	/**
 	 * Full merged address from OpenStreetMap
@@ -41,7 +42,7 @@ export class Museum extends BaseEntity {
 	@Column({
 		nullable: false,
 	})
-	longitude!: number;
+	longitude!: string;
 
 	/**
 	 * Latitude from OpenStreetMap
@@ -49,7 +50,7 @@ export class Museum extends BaseEntity {
 	@Column({
 		nullable: false,
 	})
-	latitude!: number;
+	latitude!: string;
 
 	/**
 	 * Date of record creation

@@ -6,14 +6,14 @@ const editMuseumReqSchema = z
 	.object({
 		id: z
 			.number({
-				invalid_type_error: 'ID must be an integer',
-				required_error: 'ID is required',
+				invalid_type_error: 'id must be an integer',
+				required_error: 'id is required',
 			})
 			.int(),
 		name: z
 			.string({
-				required_error: 'Name is required',
-				invalid_type_error: 'Name must be an integer',
+				required_error: 'name is required',
+				invalid_type_error: 'name must be an integer',
 			})
 			.nonempty(),
 	})

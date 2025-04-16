@@ -6,8 +6,8 @@ const searchForAddressReqSchema = z
 	.object({
 		query: z
 			.string({
-				required_error: 'Query is required',
-				invalid_type_error: 'Query must be of string type',
+				required_error: 'query is required',
+				invalid_type_error: 'query must be of string type',
 			})
 			.nonempty(),
 	})

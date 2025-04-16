@@ -6,14 +6,14 @@ const listMuseumsReqSchema = z
 	.object({
 		search: z
 			.string({
-				invalid_type_error: 'Search must be a string or undefined',
+				invalid_type_error: 'search must be a string or undefined',
 			})
 			.nonempty()
 			.optional(),
 		pageSize: z
 			.number({
-				invalid_type_error: 'PageSize must be an integer',
-				required_error: 'PageSize is required',
+				invalid_type_error: 'pageSize must be an integer',
+				required_error: 'pageSize is required',
 			})
 			.int(),
 	})

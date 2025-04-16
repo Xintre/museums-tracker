@@ -19,14 +19,15 @@
 		"@mui/material-nextjs": "^7.0.0",
 		"@tanstack/react-query": "^5.71.10",
 		"axios": "^1.8.4",
+		"leaflet": "^1.9.4",
 		"moment": "^2.30.1",
-		"monaco-editor": "^0.52.2",
 		"next": "15.2.4",
-		"react": "^19.0.0",
-		"react-dom": "^19.0.0",
-		"react-monaco-editor": "^0.58.0"
+		"react": "19.0.0-rc.1",
+		"react-dom": "19.0.0-rc.1",
+		"react-leaflet": "5.0.0-rc.2"
 	},
 	"devDependencies": {
+		"@types/leaflet": "^1.9.17",
 		"@types/node": "^20",
 		"@types/react": "^19",
 		"@types/react-dom": "^19",
