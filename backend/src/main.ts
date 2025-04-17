@@ -1,17 +1,23 @@
 import 'dotenv/config';
 import 'reflect-metadata';
 
-import { AddMuseumRequestDTO, AddMuseumResponseDTO } from '@xintre/shared';
+import {
+	AddMuseumRequestDTO,
+	AddMuseumResponseDTO,
+	GetMuseumsRequestDTO,
+	GetMuseumsResponseDTO,
+} from '@xintre/shared';
 import { NominatimError, ValidationError } from './validators/types';
+import express, { Request, Response } from 'express';
 
 import { AppDataSource } from '@/database/data-source';
+import { GetMuseumsRequestDTOValidator } from './validators/GetMuseumsRequestDTOValidator';
 import { Museum } from './database/entity/Museum';
 import { NominatimResponseDTO } from '@xintre/shared/src/dto/NominatimResponseDTO';
 import { QueryFailedError } from 'typeorm';
 import { addMuseumRequestDTOValidator } from './validators/AddMuseumRequestDTOValidator';
 import axios from 'axios';
 import cors from 'cors';
-import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import process from 'process';
@@ -132,6 +138,56 @@ async function main() {
 				error: 'Failed to fetch data from Nominatim',
 			});
 		}
+	});
+
+	app.get<GetMuseumsRequestDTO, GetMuseumsResponseDTO | ValidationError>(
+		'/api/museums-tracker/get-museums',
+		async (req, res) => {
+			// validate request
+			const pageSize = String(req.query.pageSize);
+
+			const maybeValidationError = GetMuseumsRequestDTOValidator.validate(
+				{ pageSize: pageSize },
+			);
+
+			if (maybeValidationError) {
+				res.status(400).send(maybeValidationError);
+				signale.error(
+					'Invalid GetMuseums request',
+					maybeValidationError,
+				);
+				return;
+			}
+
+			const museums = await Museum.find({});
+
+			res.send({
+				museums: museums.map((museum) => ({
+					id: museum.id,
+					name: museum.name,
+					osmid: museum.osmid,
+					address: museum.address,
+					longitude: museum.longitude,
+					latitude: museum.latitude,
+					createdAt: museum.createdAt,
+				})),
+				page: 1,
+				totalPages: 1,
+			});
+		},
+	);
+
+	// 404 middleware - must be at the end of the file!
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	app.use((_req, res, _next) => {
+		res.status(404).send('404 Not Found - please try something else');
+	});
+
+	// 500 ISE middleware - must be at the end of the file!
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	app.use((err: Error, _req: Request, res: Response, _next: unknown) => {
+		console.error(err.stack);
+		res.status(500).send('500 ISE - something went wrong');
 	});
 }
 

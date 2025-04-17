@@ -1,14 +1,14 @@
 export type MuseumDTO = {
 	id: number;
 	name: string;
-	osmid: number;
+	osmid: string;
 	address: string;
-	longitude: number;
-	latitude: number;
+	longitude: string;
+	latitude: string;
 	createdAt: Date;
 };
 
-export type ListMuseumsResponseDTO = {
+export type GetMuseumsResponseDTO = {
 	museums: MuseumDTO[];
 	page: number;
 	totalPages: number;
