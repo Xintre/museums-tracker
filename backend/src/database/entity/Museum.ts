@@ -6,6 +6,8 @@ import {
 	PrimaryGeneratedColumn,
 } from 'typeorm';
 
+import { AddressInfo } from '@xintre/shared';
+
 @Entity()
 export class Museum extends BaseEntity {
 	@PrimaryGeneratedColumn()
@@ -25,16 +27,18 @@ export class Museum extends BaseEntity {
 	@Column({
 		nullable: false,
 		unique: true,
+		type: 'bigint',
 	})
-	osmid!: string;
+	osmid!: number;
 
 	/**
 	 * Full merged address from OpenStreetMap
 	 */
 	@Column({
 		nullable: false,
+		type: 'json',
 	})
-	address!: string;
+	address!: AddressInfo;
 
 	/**
 	 * Longitude from OpenStreetMap
