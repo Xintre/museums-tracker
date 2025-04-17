@@ -1,3 +1,4 @@
 export type GetMuseumsRequestDTO = {
-	pageSize: string;
+	pageSize: number;
+	page: number;
 };

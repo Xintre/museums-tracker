@@ -8,3 +8,4 @@ export * from './GetMuseumsRequestDTO';
 export * from './GetMuseumsResponseDTO';
 export * from './SearchForAddressRequestDTO';
 export * from './SearchForAddressResponseDTO';
+export * from './nominatim';

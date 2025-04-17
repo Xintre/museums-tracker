@@ -1,8 +1,10 @@
+import { AddressInfo } from './nominatim';
+
 export type MuseumDTO = {
 	id: number;
 	name: string;
 	osmid: string;
-	address: string;
+	address: AddressInfo;
 	longitude: string;
 	latitude: string;
 	createdAt: Date;

@@ -3,7 +3,8 @@
 	"packageManager": "yarn@4.4.1",
 	"main": "build/index.js",
 	"scripts": {
-		"build": "tsc"
+		"build": "tsc",
+		"dev": "tsc --watch"
 	},
 	"devDependencies": {
 		"typescript": "*"
