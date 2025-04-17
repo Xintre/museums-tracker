@@ -1,26 +1,14 @@
+import { GenericValidator } from './GenericValidator';
 import { GetMuseumsRequestDTO } from '@xintre/shared';
-import { ValidationError } from './types';
-import { z } from 'zod';
+import { partialPaginationDTOValidator } from './partials/PartialPaginationDTOValidator';
 
-const listMuseumsReqSchema = z
-	.object({
-		pageSize: z.string({
-			invalid_type_error: 'pageSize must be a string number',
-		}),
-	})
-	.strict();
+const listMuseumsReqSchema = partialPaginationDTOValidator.extend({});
 
-export class GetMuseumsRequestDTOValidator {
-	/**
-	 * Validates the GetMuseumsRequestDTO
-	 *
-	 * @param dto the DTO to validate
-	 * @returns `z.ZodError` if failed, or undefined if validated successfully
-	 */
-	static validate(dto: GetMuseumsRequestDTO): ValidationError | undefined {
-		const result = listMuseumsReqSchema.safeParse(dto);
-		return result.success
-			? undefined
-			: { validationErrors: result.error.issues };
+export class GetMuseumsRequestDTOValidator extends GenericValidator<GetMuseumsRequestDTO> {
+	constructor() {
+		super(listMuseumsReqSchema);
 	}
 }
+
+export const getMuseumsRequestDTOValidator =
+	new GetMuseumsRequestDTOValidator();

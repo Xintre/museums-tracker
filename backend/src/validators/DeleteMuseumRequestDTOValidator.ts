@@ -1,5 +1,5 @@
 import { DeleteMuseumRequestDTO } from '@xintre/shared';
-import { ValidationError } from './types';
+import { GenericValidator } from './GenericValidator';
 import { z } from 'zod';
 
 const deleteMuseumReqSchema = z
@@ -13,17 +13,11 @@ const deleteMuseumReqSchema = z
 	})
 	.strict();
 
-export class DeleteMuseumRequestDTOValidator {
-	/**
-	 * Validates the DeleteMuseumRequestDTO
-	 *
-	 * @param dto the DTO to validate
-	 * @returns `z.ZodError` if failed, or undefined if validated successfully
-	 */
-	static validate(dto: DeleteMuseumRequestDTO): ValidationError | undefined {
-		const result = deleteMuseumReqSchema.safeParse(dto);
-		return result.success
-			? undefined
-			: { validationErrors: result.error.issues };
+export class DeleteMuseumRequestDTOValidator extends GenericValidator<DeleteMuseumRequestDTO> {
+	constructor() {
+		super(deleteMuseumReqSchema);
 	}
 }
+
+export const deleteMuseumRequestDTOValidator =
+	new DeleteMuseumRequestDTOValidator();

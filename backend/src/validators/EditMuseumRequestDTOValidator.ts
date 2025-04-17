@@ -1,5 +1,5 @@
 import { EditMuseumRequestDTO } from '@xintre/shared';
-import { ValidationError } from './types';
+import { GenericValidator } from './GenericValidator';
 import { z } from 'zod';
 
 const editMuseumReqSchema = z
@@ -19,17 +19,10 @@ const editMuseumReqSchema = z
 	})
 	.strict();
 
-export class EditMuseumRequestValidator {
-	/**
-	 * Validates the EditMuseumRequestDTO
-	 *
-	 * @param dto the DTO to validate
-	 * @returns `z.ZodError` if failed, or undefined if validated successfully
-	 */
-	static validate(dto: EditMuseumRequestDTO): ValidationError | undefined {
-		const result = editMuseumReqSchema.safeParse(dto);
-		return result.success
-			? undefined
-			: { validationErrors: result.error.issues };
+export class EditMuseumRequestValidator extends GenericValidator<EditMuseumRequestDTO> {
+	constructor() {
+		super(editMuseumReqSchema);
 	}
 }
+
+export const editMuseumRequestValidator = new EditMuseumRequestValidator();

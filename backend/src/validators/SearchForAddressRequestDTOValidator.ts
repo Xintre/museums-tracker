@@ -1,5 +1,5 @@
+import { GenericValidator } from './GenericValidator';
 import { SearchForAddressRequestDTO } from '@xintre/shared';
-import { ValidationError } from './types';
 import { z } from 'zod';
 
 const searchForAddressReqSchema = z
@@ -17,19 +17,11 @@ const searchForAddressReqSchema = z
 	})
 	.strict();
 
-export class SearchForAddressRequestDTOValidator {
-	/**
-	 * Validates the SearchForAddressRequestDTO
-	 *
-	 * @param dto the DTO to validate
-	 * @returns `z.ZodError` if failed, or undefined if validated successfully
-	 */
-	static validate(
-		dto: SearchForAddressRequestDTO,
-	): ValidationError | undefined {
-		const result = searchForAddressReqSchema.safeParse(dto);
-		return result.success
-			? undefined
-			: { validationErrors: result.error.issues };
+export class SearchForAddressRequestDTOValidator extends GenericValidator<SearchForAddressRequestDTO> {
+	constructor() {
+		super(searchForAddressReqSchema);
 	}
 }
+
+export const searchForAddressRequestDTOValidator =
+	new SearchForAddressRequestDTOValidator();
