@@ -234,3 +234,45 @@ museumRouter.delete<
 		res.status(404).end();
 	}
 });
+
+museumRouter.patch<
+	// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+	{},
+	EditMuseumResponseDTO | ValidationError,
+	EditMuseumRequestDTO
+>('/', async (req, res) => {
+	// validate request
+	const maybeValidationError = editMuseumRequestValidator.validate(req.body);
+
+	if (maybeValidationError) {
+		res.status(400).send(maybeValidationError);
+		signale.error(
+			'Invalid request to patch museum endpoint',
+			maybeValidationError,
+		);
+		return;
+	}
+
+	const { id, name } = req.body;
+
+	try {
+		const existingMuseum = await Museum.findOneBy({
+			id: id,
+		});
+		if (existingMuseum) {
+			existingMuseum.name = name;
+
+			await existingMuseum.save();
+
+			res.status(200).send({
+				id: existingMuseum.id,
+				name: existingMuseum.name,
+			});
+		} else {
+			signale.error('Museum not found!');
+			res.status(404).end();
+		}
+	} catch {
+		res.status(404).end();
+	}
+});

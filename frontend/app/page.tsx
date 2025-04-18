@@ -13,19 +13,27 @@ import {
 	useTheme,
 } from '@mui/material';
 import { Button, Grid } from '@mui/material';
+import { Delete, Edit } from '@mui/icons-material';
 import {
 	DeleteMuseumRequestDTO,
 	DeleteMuseumResponseDTO,
+	EditMuseumRequestDTO,
+	EditMuseumResponseDTO,
 	GetMuseumsResponseDTO,
 } from '@xintre/shared';
 import React, { useState } from 'react';
-import { fetchDELETE, fetchGET } from '@/utils/apiClient';
+import { fetchDELETE, fetchGET, fetchPATCH } from '@/utils/apiClient';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { Delete } from '@mui/icons-material';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { FaintDivider } from '@/components/FaintDivider';
 import MuseumIcon from '@mui/icons-material/Museum';
+import TextField from '@mui/material/TextField';
 import dynamic from 'next/dynamic';
 import moment from 'moment';
 import { stringifyAddressInfo } from '@xintre/shared';
@@ -44,6 +52,18 @@ export default function MuseumMap() {
 
 	const [page, setPage] = useState(0);
 	const [totalPages, setTotalPages] = useState(6);
+
+	const [newName, setNewName] = useState<string>('');
+	const [open, setOpen] = React.useState(false);
+	const [editingMuseumId, setEditingMuseumId] = useState<number | null>(null);
+
+	const handleClickOpen = () => {
+		setOpen(true);
+	};
+
+	const handleClose = () => {
+		setOpen(false);
+	};
 
 	const {
 		isError,
@@ -114,6 +134,39 @@ export default function MuseumMap() {
 			console.error('Error deleting museum', deleteError);
 		}
 	}, [deleteError, isDeleteError]);
+
+	const {
+		mutate: editMuseum,
+		isPending: isEditing,
+		isError: isEditError,
+		error: editError,
+	} = useMutation({
+		mutationKey: ['edit-museum', newName],
+		mutationFn: async (id: number) => {
+			const response = await fetchPATCH<
+				EditMuseumRequestDTO,
+				EditMuseumResponseDTO
+			>({
+				url: '/api/museum',
+				body: {
+					id,
+					name: newName,
+				},
+			});
+
+			return response.data;
+		},
+		onSuccess() {
+			refetch();
+		},
+	});
+
+	// log delete error effect
+	useEffect(() => {
+		if (isEditError) {
+			console.error('Error editinng museum', editError);
+		}
+	}, [editError, isEditError]);
 
 	return (
 		<div
@@ -187,7 +240,7 @@ export default function MuseumMap() {
 							alignItems="center"
 							padding="3rem"
 						>
-							{isLoading || isDeleting ? (
+							{isLoading || isDeleting || isEditing ? (
 								<CircularProgress size="5rem" />
 							) : isError || isDeleteError ? (
 								<Typography
@@ -196,7 +249,11 @@ export default function MuseumMap() {
 									textAlign="center"
 								>
 									Error{' '}
-									{isDeleteError ? 'deleting' : 'loading'}{' '}
+									{isDeleteError
+										? 'deleting'
+										: isEditError
+											? 'editing'
+											: 'loading'}{' '}
 									data, please reload page
 								</Typography>
 							) : (
@@ -211,7 +268,10 @@ export default function MuseumMap() {
 									)}
 
 									{museumsResponse?.museums?.map((museum) => (
-										<Accordion key={museum.id}>
+										<Accordion
+											key={museum.id}
+											style={{ width: '100%' }}
+										>
 											<AccordionSummary
 												expandIcon={<ExpandMoreIcon />}
 											>
@@ -261,14 +321,35 @@ export default function MuseumMap() {
 														museum.address,
 													)}
 												</Typography>
-
-												<IconButton
-													onClick={() => {
-														deleteMuseum(museum.id);
+												<Grid
+													style={{
+														display: 'flex',
+														flexDirection: 'row',
+														justifyContent: 'end',
+														alignItems: 'center',
+														width: '100%',
 													}}
 												>
-													<Delete />
-												</IconButton>
+													<IconButton
+														onClick={() => {
+															deleteMuseum(
+																museum.id,
+															);
+														}}
+													>
+														<Delete />
+													</IconButton>
+													<IconButton
+														onClick={() => {
+															setEditingMuseumId(
+																museum.id,
+															);
+															handleClickOpen();
+														}}
+													>
+														<Edit />
+													</IconButton>
+												</Grid>
 											</AccordionDetails>
 										</Accordion>
 									))}
@@ -286,6 +367,54 @@ export default function MuseumMap() {
 							)}
 						</Stack>
 					</Container>
+					<Dialog
+						open={open}
+						onClose={handleClose}
+						slotProps={{
+							paper: {
+								component: 'form',
+								onSubmit: (
+									event: React.FormEvent<HTMLFormElement>,
+								) => {
+									event.preventDefault();
+									if (editingMuseumId !== null) {
+										editMuseum(editingMuseumId);
+									}
+									handleClose();
+								},
+							},
+						}}
+					>
+						<DialogTitle>Edit Museum&apos;s name ✏️</DialogTitle>
+						<DialogContent>
+							<DialogContentText>
+								Please pass new name for the museum.
+							</DialogContentText>
+							<TextField
+								autoFocus
+								required
+								margin="dense"
+								id="name"
+								name="museums-name"
+								label="New name"
+								fullWidth
+								variant="standard"
+								value={newName}
+								onChange={(event) => {
+									setNewName(event.target.value);
+								}}
+							/>
+						</DialogContent>
+						<DialogActions>
+							<Button onClick={handleClose}>Cancel</Button>
+							<Button
+								type="submit"
+								disabled={!editingMuseumId || !newName.trim()}
+							>
+								Submit
+							</Button>
+						</DialogActions>
+					</Dialog>
 				</Grid>
 			</Grid>
 		</div>

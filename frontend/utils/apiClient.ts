@@ -68,3 +68,21 @@ export async function fetchDELETE<Body, Response>({
 		},
 	});
 }
+
+export type FetchPatchOptions<Body> = CreateBaseRequestOptions & {
+	body: Body;
+};
+
+export async function fetchPATCH<Body, Response>({
+	body,
+	...requestOptions
+}: FetchPatchOptions<Body>) {
+	return await fetchBase<Response>(requestOptions, {
+		method: 'PATCH',
+		body: JSON.stringify(body),
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+		},
+	});
+}
