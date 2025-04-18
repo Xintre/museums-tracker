@@ -5,8 +5,8 @@ export type MuseumDTO = {
 	name: string;
 	osmid: string;
 	address: AddressInfo;
-	longitude: string;
-	latitude: string;
+	longitude: number;
+	latitude: number;
 	createdAt: Date;
 };
 

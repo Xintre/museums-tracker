@@ -866,28 +866,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@monaco-editor/loader@npm:^1.5.0":
-  version: 1.5.0
-  resolution: "@monaco-editor/loader@npm:1.5.0"
-  dependencies:
-    state-local: "npm:^1.0.6"
-  checksum: 10c0/d8e1fd75fea113b4d91405784ed4db757df450c6e57a85e87728281e819a73a3ef9fe0cbb1dc1509456f1e895ad9c11e4748f80b68900cb6cf600170e14ce6ed
-  languageName: node
-  linkType: hard
-
-"@monaco-editor/react@npm:^4.7.0":
-  version: 4.7.0
-  resolution: "@monaco-editor/react@npm:4.7.0"
-  dependencies:
-    "@monaco-editor/loader": "npm:^1.5.0"
-  peerDependencies:
-    monaco-editor: ">= 0.25.0 < 1"
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10c0/a4e91c6eda1a71f5fd23871bd801de435490ccbc43934d23cba65cefe2be7e9d02c9a57c4ef80fc9fe99e4d4deea51e5db19cb4e0ecf3f51818dda0eb9cdbf12
-  languageName: node
-  linkType: hard
-
 "@mui/core-downloads-tracker@npm:^7.0.2":
   version: 7.0.2
   resolution: "@mui/core-downloads-tracker@npm:7.0.2"
@@ -1711,6 +1689,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@uidotdev/usehooks@npm:^2.4.1":
+  version: 2.4.1
+  resolution: "@uidotdev/usehooks@npm:2.4.1"
+  peerDependencies:
+    react: ">=18.0.0"
+    react-dom: ">=18.0.0"
+  checksum: 10c0/181c43fb324dbe4fef9762c61ab4b8235efa48abedf39a9bfeab65872522c43dae789c4f85b82a1164ed7bb18ae7ff25c3a19e7c4e0eb944937ac7f8109cee9b
+  languageName: node
+  linkType: hard
+
 "@unrs/resolver-binding-darwin-arm64@npm:1.5.0":
   version: 1.5.0
   resolution: "@unrs/resolver-binding-darwin-arm64@npm:1.5.0"
@@ -1836,6 +1824,7 @@ __metadata:
     "@types/signale": "npm:^1"
     "@types/yargs": "npm:^17.0.33"
     axios: "npm:^1.8.4"
+    class-transformer: "npm:^0.5.1"
     cors: "npm:^2.8.5"
     eslint: "npm:*"
     express: "npm:^5.1.0"
@@ -1864,7 +1853,6 @@ __metadata:
     "@emotion/cache": "npm:^11.14.0"
     "@emotion/react": "npm:^11.14.0"
     "@emotion/styled": "npm:^11.14.0"
-    "@monaco-editor/react": "npm:^4.7.0"
     "@mui/icons-material": "npm:^7.0.1"
     "@mui/material": "npm:^7.0.1"
     "@mui/material-nextjs": "npm:^7.0.0"
@@ -1873,6 +1861,7 @@ __metadata:
     "@types/node": "npm:^20"
     "@types/react": "npm:^19"
     "@types/react-dom": "npm:^19"
+    "@uidotdev/usehooks": "npm:^2.4.1"
     axios: "npm:^1.8.4"
     eslint: "npm:*"
     eslint-config-next: "npm:15.2.4"
@@ -2497,6 +2486,13 @@ __metadata:
   version: 3.0.0
   resolution: "chownr@npm:3.0.0"
   checksum: 10c0/43925b87700f7e3893296c8e9c56cc58f926411cce3a6e5898136daaf08f08b9a8eb76d37d3267e707d0dcc17aed2e2ebdf5848c0c3ce95cf910a919935c1b10
+  languageName: node
+  linkType: hard
+
+"class-transformer@npm:^0.5.1":
+  version: 0.5.1
+  resolution: "class-transformer@npm:0.5.1"
+  checksum: 10c0/19809914e51c6db42c036166839906420bb60367df14e15f49c45c8c1231bf25ae661ebe94736ee29cc688b77101ef851a8acca299375cc52fc141b64acde18a
   languageName: node
   linkType: hard
 
@@ -6775,13 +6771,6 @@ __metadata:
   version: 0.0.5
   resolution: "stable-hash@npm:0.0.5"
   checksum: 10c0/ca670cb6d172f1c834950e4ec661e2055885df32fee3ebf3647c5df94993b7c2666a5dbc1c9a62ee11fc5c24928579ec5e81bb5ad31971d355d5a341aab493b3
-  languageName: node
-  linkType: hard
-
-"state-local@npm:^1.0.6":
-  version: 1.0.7
-  resolution: "state-local@npm:1.0.7"
-  checksum: 10c0/8dc7daeac71844452fafb514a6d6b6f40d7e2b33df398309ea1c7b3948d6110c57f112b7196500a10c54fdde40291488c52c875575670fb5c819602deca48bd9
   languageName: node
   linkType: hard
 

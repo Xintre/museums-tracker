@@ -50,3 +50,21 @@ export async function fetchPOST<Body, Response>({
 		},
 	});
 }
+
+export type FetchDeleteOptions<Body> = CreateBaseRequestOptions & {
+	body: Body;
+};
+
+export async function fetchDELETE<Body, Response>({
+	body,
+	...requestOptions
+}: FetchDeleteOptions<Body>) {
+	return await fetchBase<Response>(requestOptions, {
+		method: 'DELETE',
+		body: JSON.stringify(body),
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+		},
+	});
+}

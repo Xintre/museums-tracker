@@ -1,13 +1,3 @@
-export type AddressDTO = {
-	name: string;
-	osmid: number;
-	display_name: string;
-	lon: number;
-	lat: number;
-};
+import { NominatimPlaceSearchResponseDTO } from './nominatim';
 
-export type SearchForAddressResponseDTO = {
-	addresses: AddressDTO[];
-	page: number;
-	totalPages: number;
-};
+export type SearchForAddressResponseDTO = NominatimPlaceSearchResponseDTO[];

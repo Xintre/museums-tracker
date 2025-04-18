@@ -10,10 +10,6 @@ const searchForAddressReqSchema = z
 				invalid_type_error: 'query must be of string type',
 			})
 			.nonempty(),
-		pageSize: z
-			.number({ invalid_type_error: 'pageSize must be an integer' })
-			.int()
-			.min(1, { message: 'pageSize must be min 1' }),
 	})
 	.strict();
 

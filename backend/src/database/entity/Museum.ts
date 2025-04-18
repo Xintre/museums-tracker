@@ -45,16 +45,18 @@ export class Museum extends BaseEntity {
 	 */
 	@Column({
 		nullable: false,
+		type: 'double precision',
 	})
-	longitude!: string;
+	longitude!: number;
 
 	/**
 	 * Latitude from OpenStreetMap
 	 */
 	@Column({
 		nullable: false,
+		type: 'double precision',
 	})
-	latitude!: string;
+	latitude!: number;
 
 	/**
 	 * Date of record creation
