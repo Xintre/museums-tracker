@@ -10,6 +10,7 @@ import morgan from 'morgan';
 import { museumRouter } from '@/routers/museumRouter';
 import process from 'process';
 import signale from 'signale';
+import { visitRouter } from './routers/visitRouter';
 
 async function main() {
 	await AppDataSource.initialize();
@@ -28,6 +29,7 @@ async function main() {
 	});
 
 	app.use('/api/museum', museumRouter);
+	app.use('/api/visit', visitRouter);
 
 	// 404 middleware - must be at the end of the file!
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars

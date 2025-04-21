@@ -1,6 +1,6 @@
-import { GenericValidator } from './GenericValidator';
+import { GenericValidator } from '../GenericValidator';
 import { GetMuseumsRequestDTO } from '@xintre/shared';
-import { partialPaginationDTOValidator } from './partials/PartialPaginationDTOValidator';
+import { partialPaginationDTOValidator } from '../partials';
 
 const listMuseumsReqSchema = partialPaginationDTOValidator.extend({});
 

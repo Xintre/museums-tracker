@@ -1,5 +1,5 @@
 import { DeleteMuseumRequestDTO } from '@xintre/shared';
-import { GenericValidator } from './GenericValidator';
+import { GenericValidator } from '../GenericValidator';
 import { z } from 'zod';
 
 const deleteMuseumReqSchema = z

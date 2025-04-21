@@ -14,14 +14,14 @@ import { Museum } from '@/database/entity/Museum';
 import { NominatimService } from '@/services/NominatimService';
 import { QueryFailedError } from 'typeorm';
 import { ValidationError } from '@/validators/types';
-import { addMuseumRequestDTOValidator } from '@/validators/AddMuseumRequestDTOValidator';
-import { deleteMuseumRequestDTOValidator } from '@/validators/DeleteMuseumRequestDTOValidator';
-import { editMuseumRequestValidator } from '@/validators/EditMuseumRequestDTOValidator';
+import { addMuseumRequestDTOValidator } from '@/validators/museum/AddMuseumRequestDTOValidator';
+import { deleteMuseumRequestDTOValidator } from '@/validators/museum/DeleteMuseumRequestDTOValidator';
+import { editMuseumRequestValidator } from '@/validators/museum/EditMuseumRequestDTOValidator';
 import { ensurePaginationParamsInBounds } from '@/utils/pagination';
 import express from 'express';
-import { getMuseumsRequestDTOValidator } from '@/validators/GetMuseumsRequestDTOValidator';
+import { getMuseumsRequestDTOValidator } from '@/validators/museum/GetMuseumsRequestDTOValidator';
 import { instanceToPlain } from 'class-transformer';
-import { searchForAddressRequestDTOValidator } from '@/validators/SearchForAddressRequestDTOValidator';
+import { searchForAddressRequestDTOValidator } from '@/validators/museum/SearchForAddressRequestDTOValidator';
 import signale from 'signale';
 
 export const museumRouter = express.Router();
@@ -134,49 +134,6 @@ museumRouter.get<
 		museums: museums.map((museum) => instanceToPlain(museum) as MuseumDTO),
 		...paginationInfo,
 	});
-});
-
-museumRouter.patch<
-	// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-	{},
-	EditMuseumResponseDTO | ValidationError,
-	EditMuseumRequestDTO
->('/', async (req, res) => {
-	// validate request
-	const maybeValidationError = editMuseumRequestValidator.validate(req.body);
-
-	if (maybeValidationError) {
-		res.status(400).send(maybeValidationError);
-		signale.error(
-			'Invalid request to add museum endpoint',
-			maybeValidationError,
-		);
-		return;
-	}
-
-	const { id, name } = req.body;
-	try {
-		const existingMuseum = await Museum.findOneBy({
-			id: id,
-		});
-
-		if (existingMuseum) {
-			existingMuseum.name = name;
-
-			await existingMuseum.save();
-
-			res.status(200).send({
-				id: existingMuseum.id,
-				name: existingMuseum.name,
-			});
-		} else {
-			signale.error('Museum not found!');
-			res.status(404).end();
-		}
-	} catch (error: unknown) {
-		signale.error('Could not fetch data from Nominatim!', error);
-		res.status(500).end();
-	}
 });
 
 museumRouter.get<

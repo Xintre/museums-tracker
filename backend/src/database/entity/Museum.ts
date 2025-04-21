@@ -3,10 +3,12 @@ import {
 	Column,
 	CreateDateColumn,
 	Entity,
+	OneToMany,
 	PrimaryGeneratedColumn,
 } from 'typeorm';
 
 import { AddressInfo } from '@xintre/shared';
+import { Visit } from './Visit';
 
 @Entity()
 export class Museum extends BaseEntity {
@@ -63,4 +65,10 @@ export class Museum extends BaseEntity {
 	 */
 	@CreateDateColumn()
 	createdAt!: Date;
+
+	/**
+	 * Visits' Ratings
+	 */
+	@OneToMany(() => Visit, (visit) => visit.museum, { onDelete: 'CASCADE' })
+	visits!: Visit[];
 }

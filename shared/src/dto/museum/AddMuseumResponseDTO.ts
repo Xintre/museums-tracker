@@ -1,4 +1,4 @@
-import { AddressInfo } from './nominatim';
+import { AddressInfo } from '../nominatim';
 
 export type AddMuseumResponseDTO = {
 	id: number;

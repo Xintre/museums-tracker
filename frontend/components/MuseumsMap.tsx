@@ -57,7 +57,7 @@ export default function MuseumsMap({ museums }: MuseumsMapProps) {
 			center={center}
 			zoom={zoom}
 			scrollWheelZoom={true}
-			style={{ height: '40rem', width: '100%' }}
+			style={{ height: '35rem', width: '100%' }}
 		>
 			<TileLayer
 				attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

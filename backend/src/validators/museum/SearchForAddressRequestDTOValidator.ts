@@ -1,4 +1,4 @@
-import { GenericValidator } from './GenericValidator';
+import { GenericValidator } from '../GenericValidator';
 import { SearchForAddressRequestDTO } from '@xintre/shared';
 import { z } from 'zod';
 

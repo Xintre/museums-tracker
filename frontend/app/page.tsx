@@ -344,6 +344,7 @@ export default function MuseumMap() {
 															setEditingMuseumId(
 																museum.id,
 															);
+															setNewName('');
 															handleClickOpen();
 														}}
 													>

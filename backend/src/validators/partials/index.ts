@@ -1,0 +1,1 @@
+export { partialPaginationDTOValidator } from './partialPaginationDTOValidator';
