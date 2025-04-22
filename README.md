@@ -49,7 +49,7 @@ There are 3 submodules in this monorepository:
 <details>
   <summary>Museums add screen - searching & adding a musuem</summary>
     <img style="width:300px" src="./images/add museum - searching musem.png">
-    <img style="width:300px" src="./images/add museum searching - no results.pngpng">
+    <img style="width:300px" src="./images/add museum searching - no results.png">
 </details>
 
 ## Code style 🧑‍💻
