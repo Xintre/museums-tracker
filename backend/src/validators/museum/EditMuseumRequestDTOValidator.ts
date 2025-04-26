@@ -9,7 +9,8 @@ const editMuseumReqSchema = z
 				invalid_type_error: 'id must be an integer',
 				required_error: 'id is required',
 			})
-			.int(),
+			.int()
+			.positive(),
 		name: z
 			.string({
 				required_error: 'name is required',

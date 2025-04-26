@@ -9,7 +9,8 @@ const deleteMuseumReqSchema = z
 				required_error: 'id is required',
 				invalid_type_error: 'id must be of integer type',
 			})
-			.int(),
+			.int()
+			.positive(),
 	})
 	.strict();
 

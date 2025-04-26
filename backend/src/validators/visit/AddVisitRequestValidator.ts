@@ -13,7 +13,8 @@ const addVisitReqSchema = z.object({
 			invalid_type_error: 'museumId must be an integer',
 			required_error: 'museumId is required',
 		})
-		.int(),
+		.int()
+		.positive(),
 });
 
 export class AddVisitRequestValidator extends GenericValidator<AddVisitRequestDTO> {

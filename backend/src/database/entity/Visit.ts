@@ -1,5 +1,6 @@
 import {
 	BaseEntity,
+	Check,
 	Column,
 	Entity,
 	ManyToOne,
@@ -24,10 +25,10 @@ export class Visit extends BaseEntity {
 	 * Rate of visit
 	 */
 	@Column({
-		type: 'enum',
-		enum: Rate,
+		type: 'int',
 	})
-	rate!: Rate;
+	@Check('rate >= 1 AND rate <= 5')
+	rate!: number;
 
 	/**
 	 * Museum of visit
