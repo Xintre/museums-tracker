@@ -8,7 +8,6 @@ import {
 } from 'typeorm';
 
 import { Museum } from './Museum';
-import { Rate } from '@xintre/shared';
 
 @Entity()
 export class Visit extends BaseEntity {

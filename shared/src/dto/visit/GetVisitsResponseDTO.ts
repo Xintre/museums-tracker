@@ -1,8 +1,6 @@
-import { Rate } from '../../enums';
-
 export type VisitDTO = {
 	dateOfVisit: Date;
-	rate: Rate;
+	rate: number;
 };
 
 export type GetVisitsResponseDTO = {

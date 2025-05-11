@@ -1,7 +1,5 @@
-import { Rate } from '../../enums';
-
 export type AddVisitRequestDTO = {
-	rate: Rate;
+	rate: number;
 	dateOfVisit: Date;
 	museumId: number;
 };

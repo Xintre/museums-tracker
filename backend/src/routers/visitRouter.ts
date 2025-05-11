@@ -3,7 +3,6 @@ import {
 	AddVisitResponseDTO,
 	GetVisitsRequestDTO,
 	GetVisitsResponseDTO,
-	Rate,
 } from '@xintre/shared';
 import { Museum, Visit } from '@/database/entity';
 import {
