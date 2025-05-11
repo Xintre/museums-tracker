@@ -42,7 +42,7 @@ export default function AddMuseum() {
 	} = useQuery({
 		enabled: queryDebounced.trim().length > 0,
 		queryKey: ['museum-search', queryDebounced],
-		gcTime: 0, // disable cache - we always want current data
+		staleTime: 5 * 60 * 1000, // consider cached data up-to-date for 5 mins
 		queryFn: async () => {
 			const response = await fetchGET<SearchForAddressResponseDTO>({
 				url: `/api/museum/search?query=${queryDebounced}`,

@@ -73,7 +73,6 @@ export default function MuseumMap() {
 		data: museumsResponse,
 	} = useQuery({
 		queryKey: ['museums-list', page],
-		gcTime: 0, // disable cache - we always want current data
 		queryFn: async () => {
 			const query = new URLSearchParams();
 
