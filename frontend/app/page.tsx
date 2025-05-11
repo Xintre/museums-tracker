@@ -8,7 +8,6 @@ import {
 	Container,
 	IconButton,
 	Pagination,
-	Paper,
 	Stack,
 	Typography,
 	useTheme,
@@ -285,20 +284,43 @@ export default function MuseumMap() {
 														alignItems: 'center',
 													}}
 												>
-													<Typography
-														component="div"
-														variant="h6"
-													>
-														{museum.name} (
-														{museum.address.city},{' '}
-														{museum.address.country}
-														)
-													</Typography>
+													<Stack>
+														<Typography
+															component="div"
+															variant="h6"
+														>
+															{museum.name}
+														</Typography>
+
+														<Typography
+															component="div"
+															variant="subtitle1"
+														>
+															(
+															{museum.address.city
+																? `${
+																		museum
+																			.address
+																			.city
+																	}, `
+																: ''}
+															{
+																museum.address
+																	.country
+															}
+															)
+														</Typography>
+													</Stack>
 
 													<Typography
 														component="div"
 														variant="caption"
 														color="textSecondary"
+														style={{
+															textAlign: 'right',
+															whiteSpace:
+																'nowrap',
+														}}
 													>
 														{moment(
 															museum.createdAt,
@@ -357,72 +379,69 @@ export default function MuseumMap() {
 									))}
 
 									<Pagination
+										sx={{
+											marginTop: 2,
+										}}
 										count={totalPages}
 										showFirstButton
 										showLastButton
-										page={page}
+										page={page + 1}
 										onChange={(event, page) => {
-											setPage(page);
+											setPage(page - 1);
 										}}
 									/>
 								</>
 							)}
 						</Stack>
 					</Container>
-					<Paper>
-						<Dialog
-							open={open}
-							onClose={handleClose}
-							slotProps={{
-								paper: {
-									component: 'form',
-									onSubmit: (
-										event: React.FormEvent<HTMLFormElement>,
-									) => {
-										event.preventDefault();
-										if (editingMuseumId !== null) {
-											editMuseum(editingMuseumId);
-										}
-										handleClose();
-									},
-								},
-							}}
-						>
-							<DialogTitle>
-								Edit Museum&apos;s name ✏️
-							</DialogTitle>
-							<DialogContent>
-								<DialogContentText>
-									Please pass new name for the museum.
-								</DialogContentText>
-								<TextField
-									autoFocus
-									required
-									margin="dense"
-									id="name"
-									name="museums-name"
-									label="New name"
-									fullWidth
-									variant="standard"
-									value={newName}
-									onChange={(event) => {
-										setNewName(event.target.value);
-									}}
-								/>
-							</DialogContent>
-							<DialogActions>
-								<Button onClick={handleClose}>Cancel</Button>
-								<Button
-									type="submit"
-									disabled={
-										!editingMuseumId || !newName.trim()
+					<Dialog
+						open={open}
+						onClose={handleClose}
+						slotProps={{
+							paper: {
+								component: 'form',
+								onSubmit: (
+									event: React.FormEvent<HTMLFormElement>,
+								) => {
+									event.preventDefault();
+									if (editingMuseumId !== null) {
+										editMuseum(editingMuseumId);
 									}
-								>
-									Submit
-								</Button>
-							</DialogActions>
-						</Dialog>
-					</Paper>
+									handleClose();
+								},
+							},
+						}}
+					>
+						<DialogTitle>Edit Museum&apos;s name ✏️</DialogTitle>
+						<DialogContent>
+							<DialogContentText>
+								Please pass new name for the museum.
+							</DialogContentText>
+							<TextField
+								autoFocus
+								required
+								margin="dense"
+								id="name"
+								name="museums-name"
+								label="New name"
+								fullWidth
+								variant="standard"
+								value={newName}
+								onChange={(event) => {
+									setNewName(event.target.value);
+								}}
+							/>
+						</DialogContent>
+						<DialogActions>
+							<Button onClick={handleClose}>Cancel</Button>
+							<Button
+								type="submit"
+								disabled={!editingMuseumId || !newName.trim()}
+							>
+								Submit
+							</Button>
+						</DialogActions>
+					</Dialog>
 				</Grid>
 			</Grid>
 		</div>
