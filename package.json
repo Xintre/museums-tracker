@@ -6,7 +6,7 @@
 		"dev:frontend": "yarn workspace @xintre/frontend dev",
 		"build": "yarn workspaces foreach -Ap run build",
 		"start": "concurrently \"yarn workspace @xintre/frontend start\" \"yarn workspace @xintre/backend start\"",
-		"dev": "concurrently \"yarn workspace @xintre/frontend dev\" \"yarn workspace @xintre/backend dev\"",
+		"dev": "concurrently \"yarn workspace @xintre/frontend dev\" \"yarn workspace @xintre/backend dev\" \"yarn workspace @xintre/shared dev\"",
 		"stylecheck": "yarn workspaces foreach -Ap run stylecheck",
 		"lint": "yarn workspaces foreach -Ap run lint"
 	},

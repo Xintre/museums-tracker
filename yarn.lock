@@ -1823,6 +1823,7 @@ __metadata:
     "@types/pg": "npm:^8"
     "@types/signale": "npm:^1"
     "@types/yargs": "npm:^17.0.33"
+    "@xintre/shared": "workspace:^"
     axios: "npm:^1.8.4"
     class-transformer: "npm:^0.5.1"
     cors: "npm:^2.8.5"
@@ -1862,6 +1863,7 @@ __metadata:
     "@types/react": "npm:^19"
     "@types/react-dom": "npm:^19"
     "@uidotdev/usehooks": "npm:^2.4.1"
+    "@xintre/shared": "workspace:^"
     axios: "npm:^1.8.4"
     eslint: "npm:*"
     eslint-config-next: "npm:15.2.4"
@@ -1897,7 +1899,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@xintre/shared@workspace:shared":
+"@xintre/shared@workspace:^, @xintre/shared@workspace:shared":
   version: 0.0.0-use.local
   resolution: "@xintre/shared@workspace:shared"
   dependencies:
