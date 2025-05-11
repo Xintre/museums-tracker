@@ -34,6 +34,10 @@ There are 3 submodules in this monorepository:
 ## Screenshots 📸
 
 <details>
+  <summary>ERD diagram of the DB</summary>
+    <img style="width:200px" src="./images/ERD.jpg">
+</details>
+<details>
   <summary>Museums view screen - dark & light mode</summary>
     <img style="width:300px" src="./images/museums view - dark mode.png">
     <img style="width:300px" src="./images/museums view - light mode.png">
